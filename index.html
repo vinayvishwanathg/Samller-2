@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bookshelf Apps</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"> 
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/768e7b3923.js" crossorigin="anonymous"></script>
+  <!-- Import Css -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="head_bar">
+    <h1 class="head_bar__title">Aplikasi Rak Buku</h1>
+  </header>
+  <main>
+    <section class="input_section">
+      <h1>Formulir Daftar Buku</h1>
+      <form id="inputBook" class="form" action="index.html">
+        <div class="input">
+          <input type="text" id="inputBookTitle" placeholder="Judul Buku" required>
+          <input type="text" id="inputBookAuthor" placeholder="Penulis" required>
+          <input type="number" id="inputBookYear" placeholder="Tahun Terbit" required>
+        </div>
+        <div class="input_inline">
+          <label for="inputBookIsComplete">Selesai dibaca</label>
+          <input id="inputBookIsComplete" type="checkbox">
+        </div>
+        <button id="bookSubmit" value="Submit" name="Submit" type="submit">Tambahkan Buku</button>
+      </form>
+    </section>
+    
+    <section class="search_section">
+      <h2>Pencarian Buku</h2>
+      <div class="searchContainer">
+        <form id="searchBook">
+          <input id="searchBookTitle" type="text" placeholder="Cari Judul Buku">
+          <button id="searchSubmit" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Cari</button>
+          <select id="kategori" name="kategori">
+            <option value="default">Semua Kategori</option>
+            <option value="belum">Belum Dibaca</option>
+            <option value="selesai">Selesai Dibaca</option>
+          </select>
+        </form>
+      </div>
+    </section>
+    
+    <section class="book_shelf">
+      <div class="shelf">
+        <h2>Belum Dibaca</h2>
+        <div id="incompleteBookshelfList" class="book_list"></div>
+      </div>
+      <div class="shelf">
+        <h2>Selesai Dibaca</h2>
+        <div id="completeBookshelfList" class="book_list"></div>
+      </div>
+    </section>
+  </main>
+  <script src="js/script.js"></script>
+
+</body>
+</html>
