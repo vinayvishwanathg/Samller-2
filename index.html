@@ -10,36 +10,32 @@
   <link rel="stylesheet" href="css/style.css"> <!-- Your custom stylesheet -->
   <style>
     /* Additional custom styles */
-    .book_list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
+    .search_section {
+      text-align: center;
     }
 
-    .book {
-      background-color: #f9f9f9;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      width: calc(50% - 20px);
+    .search_bar {
       margin-bottom: 20px;
     }
 
-    .book h3 {
-      margin-top: 0;
+    .search_bar input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
 
-    .book p {
-      margin: 5px 0;
-    }
-
-    .book button {
+    .search_bar button {
+      padding: 10px 20px;
       background-color: #007bff;
       color: #fff;
       border: none;
-      padding: 8px 16px;
-      border-radius: 4px;
+      border-radius: 5px;
       cursor: pointer;
+    }
+
+    .search_bar button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
@@ -65,10 +61,12 @@
     </section>
     
     <section class="search_section">
-      <h2>Search for Books</h2>
-      <div class="searchContainer">
-        <!-- Direct users to Amazon for book search -->
-        <a href="https://www.amazon.com/" target="_blank" rel="noopener noreferrer">Search on Amazon <i class="fas fa-external-link-alt"></i></a>
+      <h2>Search for Books on Amazon</h2>
+      <div class="search_bar">
+        <form action="https://www.amazon.com/s" method="get" target="_blank">
+          <input type="text" name="k" placeholder="Search Book Title">
+          <button type="submit"><i class="fas fa-search"></i> Search</button>
+        </form>
       </div>
     </section>
     
@@ -76,24 +74,13 @@
       <div class="shelf">
         <h2>Unread Books</h2>
         <div id="incompleteBookshelfList" class="book_list">
-          <div class="book">
-            <h3>The Silent Patient</h3>
-            <p>by Alex Michaelides</p>
-            <p>Published: 2019</p>
-            <button class="markAsReadButton">Mark as Read</button>
-          </div>
-          <!-- Add more unread books here -->
+          <!-- Add unread books here -->
         </div>
       </div>
       <div class="shelf">
         <h2>Read Books</h2>
         <div id="completeBookshelfList" class="book_list">
-          <div class="book">
-            <h3>Becoming</h3>
-            <p>by Michelle Obama</p>
-            <p>Published: 2018</p>
-          </div>
-          <!-- Add more read books here -->
+          <!-- Add read books here -->
         </div>
       </div>
     </section>
