@@ -1,3 +1,5 @@
+// script.js
+
 // Function to handle form submission for adding a new book
 document.getElementById('inputBook').addEventListener('submit', function(event) {
   event.preventDefault(); // Prevent the default form submission
