@@ -2,15 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Bookshelf Apps</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <title>Bookshelf App</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"> 
-  <!-- Font Awesome -->
-  <script src="https://kit.fontawesome.com/768e7b3923.js" crossorigin="anonymous"></script>
-  <!-- Import CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+  <link rel="stylesheet" href="css/style.css"> <!-- Your custom stylesheet -->
 </head>
 <body>
   <header class="head_bar">
@@ -18,7 +15,7 @@
   </header>
   <main>
     <section class="input_section">
-      <h1>Book Entry Form</h1>
+      <h2>Book Entry Form</h2>
       <form id="inputBook" class="form" action="index.html">
         <div class="input">
           <input type="text" id="inputBookTitle" placeholder="Book Title" required>
@@ -38,7 +35,7 @@
       <div class="searchContainer">
         <form id="searchBook">
           <input id="searchBookTitle" type="text" placeholder="Search Book Title">
-          <button id="searchSubmit" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+          <button id="searchSubmit" type="submit"><i class="fas fa-search"></i> Search</button>
           <select id="category" name="category">
             <option value="default">All Categories</option>
             <option value="unread">Unread</option>
