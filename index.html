@@ -2,14 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Bookshelf Apps</title>
+  <title>Bookshelf App</title>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"> 
-  <!-- Font Awesome -->
-  <script src="https://kit.fontawesome.com/768e7b3923.js" crossorigin="anonymous"></script>
-  <!-- Import CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -18,7 +16,7 @@
   </header>
   <main>
     <section class="input_section">
-      <h1>Book Entry Form</h1>
+      <h2>Book Entry Form</h2>
       <form id="inputBook" class="form" action="index.html">
         <div class="input">
           <input type="text" id="inputBookTitle" placeholder="Book Title" required>
@@ -32,38 +30,13 @@
         <button id="bookSubmit" value="Submit" name="Submit" type="submit">Add Book</button>
       </form>
     </section>
-    <section class="search_section">
-  <h2>Book Search</h2>
-  <div class="searchContainer">
-    <form id="searchBook">
-      <input id="searchBookTitle" type="text" placeholder="Search Book Title">
-      <button id="searchSubmit" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
-      <select id="category" name="category">
-        <option value="default">All Categories</option>
-        <option value="unread">Unread</option>
-        <option value="read">Read</option>
-      </select>
-    </form>
-  </div>
-  <!-- Sample Book List -->
-  <div class="sample_books">
-    <h3>Sample Books</h3>
-    <ul>
-      <li><a href="#">Book 1</a></li>
-      <li><a href="#">Book 2</a></li>
-      <li><a href="#">Book 3</a></li>
-      <!-- Add more sample books as needed -->
-    </ul>
-  </div>
-</section>
-
     
     <section class="search_section">
       <h2>Book Search</h2>
       <div class="searchContainer">
         <form id="searchBook">
           <input id="searchBookTitle" type="text" placeholder="Search Book Title">
-          <button id="searchSubmit" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+          <button id="searchSubmit" type="submit"><i class="fas fa-search"></i> Search</button>
           <select id="category" name="category">
             <option value="default">All Categories</option>
             <option value="unread">Unread</option>
