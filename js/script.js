@@ -1,257 +1,90 @@
-const bookself = [];
-const RENDER_EVENT = 'render-book';
-const SAVED_EVENT = 'saved-book';
-const STORAGE_KEY = 'data_book';
-
-  function isStorageExist() { 
-    if (typeof (Storage) === undefined) {
-      alert('Browser kamu tidak mendukung local storage');
-      return false;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bookshelf App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+  <link rel="stylesheet" href="css/style.css"> <!-- Your custom stylesheet -->
+  <style>
+    /* Additional custom styles */
+    .search_section {
+      text-align: center;
     }
-    return true;
-  }  
 
-  // Memuat Storage
-  function loadDataFromStorage() {
-    const serializedData = localStorage.getItem(STORAGE_KEY);
-    let data = JSON.parse(serializedData);
-  
-    if (data !== null) {
-      for (const book of data) {
-        bookself.push(book);
-      }
+    .search_bar {
+      margin-bottom: 20px;
     }
-  
-    document.dispatchEvent(new Event(RENDER_EVENT));
-  }
 
-  function generateDataBook(id, title, author, year,isComplete) {
-      return {
-        id,
-        title,
-        author,
-        year,
-        isComplete
-      }
+    .search_bar input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
-  
-  function generateId() {
-    return +new Date();
-  }
-  
-  function saveData() {
-    if (isStorageExist()) {
-      const parsed = JSON.stringify(bookself);
-      localStorage.setItem(STORAGE_KEY, parsed);
-      document.dispatchEvent(new Event(SAVED_EVENT));
-    }
-  }
 
-  function addBook() {
-    const title = document.getElementById('inputBookTitle').value;
-    const author = document.getElementById('inputBookAuthor').value;
-    const year = document.getElementById('inputBookYear').value;
-    const isComplete = document.getElementById('inputBookIsComplete').checked;
-   
-    const generatedID = generateId();
-    const bookObject = generateDataBook(generatedID, title, author, year,isComplete);
+    .search_bar button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .search_bar button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header class="head_bar">
+    <h1 class="head_bar__title">Bookshelf Application</h1>
+  </header>
+  <main>
+    <section class="input_section">
+      <h2>Add a New Book</h2>
+      <form id="inputBook" class="form" action="index.html">
+        <div class="input">
+          <input type="text" id="inputBookTitle" placeholder="Book Title" required>
+          <input type="text" id="inputBookAuthor" placeholder="Author" required>
+          <input type="number" id="inputBookYear" placeholder="Year Published" required>
+        </div>
+        <div class="input_inline">
+          <label for="inputBookIsComplete">Completed</label>
+          <input id="inputBookIsComplete" type="checkbox">
+        </div>
+        <button id="bookSubmit" value="Submit" name="Submit" type="submit">Add Book</button>
+      </form>
+    </section>
     
-    // Kosongkan Kolom Input Setelah Klik Submit
-    document.getElementById("inputBookTitle").value = "";
-    document.getElementById("inputBookAuthor").value = "";
-    document.getElementById("inputBookYear").value = "";
-    document.getElementById("inputBookIsComplete").checked = false;
-    bookself.push(bookObject);
-    document.dispatchEvent(new Event(RENDER_EVENT));    
-    saveData();
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    const submitForm = document.getElementById('inputBook');
-    const searchForm = document.getElementById('searchBook');
-
-    submitForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-      addBook();            
-    });
-    if (isStorageExist()) {
-      loadDataFromStorage();
-    }
+    <section class="search_section">
+      <h2>Search for Books on Amazon</h2>
+      <div class="search_bar">
+        <form action="https://www.amazon.com/s" method="get" target="_blank">
+          <input type="text" name="k" placeholder="Enter Book Title">
+          <button type="submit"><i class="fas fa-search"></i> Search</button>
+        </form>
+      </div>
+    </section>
     
-    searchForm.addEventListener('submit', function(event) {
-      const searchInput = document.getElementById('searchBookTitle').value;
-      const categorySelect = document.getElementById('kategori').value;
-
-      event.preventDefault();
-      searchBooks(searchInput, categorySelect);
-    });
-
-  });
-
-  function findBook(bookId) {
-    for (const bookItem of bookself) {
-      if (bookItem.id === bookId) {
-        return bookItem;
-      }
-    }
-    return null;
-  }
-
-  function makeBook(bookObject) {
-    const textTitle = document.createElement('h3');
-    textTitle.innerText = ("Judul Buku : " + bookObject.title);
-   
-    const textAuthor = document.createElement('p');
-    textAuthor.innerText = ("Penulis : " + bookObject.author);
-    
-    const textYear = document.createElement('p');
-    textYear.innerText = ("Tahun : " + bookObject.year);
-   
-    const action = document.createElement('div');
-    action.classList.add('action');
-    
-    const container = document.createElement('article');
-    container.classList.add('book_item');
-    container.append(textTitle, textAuthor,textYear);
-    container.append(action);
-    container.setAttribute('id', `book-${bookObject.id}`);
-   
-    if (bookObject.isComplete) {
-      const inCompleteButton = document.createElement('button');
-      inCompleteButton.classList.add('green');
-      inCompleteButton.textContent = 'Belum Dibaca';
-   
-      inCompleteButton.addEventListener('click', function () {
-        undoBookFromCompleted(bookObject.id);
-      });
-   
-      const trashButton = document.createElement('button');
-      trashButton.classList.add('red');
-      trashButton.textContent = 'Hapus Buku';
-   
-      trashButton.addEventListener('click', function () {
-        removeBookFromCompleted(bookObject.id);
-      });
-   
-      action.append(inCompleteButton, trashButton);
-    } else {
-      const completeButton = document.createElement('button');
-      completeButton.classList.add('green');
-      completeButton.textContent = 'Selesai Dibaca';
-
-   
-      completeButton.addEventListener('click', function () {
-        addBookToCompleted(bookObject.id);
-      });
-   
-      const trashButton = document.createElement('button');
-      trashButton.classList.add('red');
-      trashButton.textContent = 'Hapus Buku';
-   
-      trashButton.addEventListener('click', function () {
-        removeBookFromCompleted(bookObject.id);
-      });
-   
-      action.append(completeButton, trashButton);
-    }
-
-    return container;
-  }
-
-  function findBookIndex(bookId) {
-    for (const index in bookself) {
-      if (bookself[index].id === bookId) {
-        return index;
-      }
-    }
-   
-    return -1;
-  }
-
-  function addBookToCompleted (bookId) {
-    const bookTarget = findBook(bookId);
-   
-    if (bookTarget == null) return;
-   
-    bookTarget.isComplete = true;
-    document.dispatchEvent(new Event(RENDER_EVENT));
-    saveData();
-  }
-
-  function removeBookFromCompleted(bookId) {
-    const bookTarget = findBookIndex(bookId);
-    const confirmDelete = confirm(`Anda yakin ingin menghapus buku yang berjudul '${bookself[bookTarget].title}'?`);
-
-    if (confirmDelete) {
-
-      if (bookTarget === -1) return;
-     
-      bookself.splice(bookTarget, 1);
-      document.dispatchEvent(new Event(RENDER_EVENT));
-      saveData();
-    }
-  }
-   
-  function undoBookFromCompleted(bookId) {
-    const bookTarget = findBook(bookId);
-   
-    if (bookTarget == null) return;
-   
-    bookTarget.isComplete = false;
-    document.dispatchEvent(new Event(RENDER_EVENT));
-    saveData();
-  }
-
-  // Menampilkan Pencarian Buku
-  function displaySearchResults(searchResults) {
-    const incompleteBookshelfList = document.getElementById('incompleteBookshelfList');
-    const completeBookshelfList = document.getElementById('completeBookshelfList');
-    incompleteBookshelfList.innerHTML = '';
-    completeBookshelfList.innerHTML = '';
-    
-    for (const bookItem of searchResults) {
-        const bookElement = makeBook(bookItem);
-        
-        if (bookItem.isComplete) {
-            completeBookshelfList.append(bookElement);
-        } else {
-            incompleteBookshelfList.append(bookElement);
-        }
-    }
-  }
-
-  // Pencarian Buku Berdasarkan Kategori
-  function searchBooks(searchTerm, category) {
-    let bookData = localStorage.getItem(STORAGE_KEY);
-    
-    if (bookData) {
-        bookData = JSON.parse(bookData);
-    } else {
-        bookData = [];
-    }
-
-    const searchResults = [];
-    for (const bookItem of bookData) {
-        if ((searchTerm === '' || bookItem.title.includes(searchTerm)) && (category === 'default' || category === 'belum' && !bookItem.isComplete || category === 'selesai' && bookItem.isComplete)) {
-            searchResults.push(bookItem);
-        }
-    }
-    console.log(searchResults);
-    displaySearchResults(searchResults);
-  }
-
-  document.addEventListener(RENDER_EVENT, function () {
-    const incompleteBookshelfList = document.getElementById('incompleteBookshelfList');
-    incompleteBookshelfList.innerHTML = '';
-   
-    const completeBookshelfList = document.getElementById('completeBookshelfList');
-    completeBookshelfList.innerHTML = '';
-   
-    for (const bookItem of bookself) {
-      const bookElement = makeBook(bookItem);
-      if (!bookItem.isComplete)
-        incompleteBookshelfList.append(bookElement);
-      else
-        completeBookshelfList.append(bookElement);
-    }
-  });
+    <section class="book_shelf">
+      <div class="shelf">
+        <h2>Unread Books</h2>
+        <div id="incompleteBookshelfList" class="book_list">
+          <!-- Add unread books here -->
+        </div>
+      </div>
+      <div class="shelf">
+        <h2>Read Books</h2>
+        <div id="completeBookshelfList" class="book_list">
+          <!-- Add read books here -->
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="js/script.js"></script>
+</body>
+</html>
