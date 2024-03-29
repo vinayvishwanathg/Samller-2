@@ -8,6 +8,40 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
   <link rel="stylesheet" href="css/style.css"> <!-- Your custom stylesheet -->
+  <style>
+    /* Additional custom styles */
+    .book_list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .book {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: calc(50% - 20px);
+      margin-bottom: 20px;
+    }
+
+    .book h3 {
+      margin-top: 0;
+    }
+
+    .book p {
+      margin: 5px 0;
+    }
+
+    .book button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <header class="head_bar">
@@ -31,17 +65,10 @@
     </section>
     
     <section class="search_section">
-      <h2>Book Search</h2>
+      <h2>Search for Books</h2>
       <div class="searchContainer">
-        <form id="searchBook">
-          <input id="searchBookTitle" type="text" placeholder="Search Book Title">
-          <button id="searchSubmit" type="submit"><i class="fas fa-search"></i> Search</button>
-          <select id="category" name="category">
-            <option value="default">All Categories</option>
-            <option value="unread">Unread</option>
-            <option value="read">Read</option>
-          </select>
-        </form>
+        <!-- Direct users to Amazon for book search -->
+        <a href="https://www.amazon.com/" target="_blank" rel="noopener noreferrer">Search on Amazon <i class="fas fa-external-link-alt"></i></a>
       </div>
     </section>
     
